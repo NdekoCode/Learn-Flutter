@@ -8,10 +8,53 @@ void main() {
 
 // Represente notre application
 class MyApp extends StatelessWidget {
+  Widget titleSection = Container(
+      // On met un padding ou un espacement dans toutes les directions pour espacer les elements des alentours
+      padding: const EdgeInsets.all(10),
+      child:
+          // On initialise une ligne
+          Row(
+        // On lui donne les enfants dont chaque indice sera considerer comme une colonne dans la ligne
+        children: [
+          // On dit à cette colonne prend toute l'espace disponible qui n'est pas occuper
+          Expanded(
+            child:
+                // On dit explicitement que le premier indice est une colone
+                Column(
+              // La colonne est aligner au debut
+              crossAxisAlignment: CrossAxisAlignment.start,
+              // Elle aura des elements qui seront placer les un sous les autres
+              children: [
+                // Le premier element de la colonne est dans un container
+                Container(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    // Un noeud de type texte
+                    child: Text("Pizza Fracile",
+                        // On lui met un style ici c'est une graissage et une taille de police
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 25))),
+                Container(
+                    padding: const EdgeInsets.only(bottom: 5),
+                    child: Text("Par Arick Bulakali",
+                        style:
+                            TextStyle(color: Colors.grey[500], fontSize: 20))),
+                Text("Fait le 25 mars 2022",
+                    style: TextStyle(color: Colors.grey[500], fontSize: 16))
+              ],
+            ),
+          ),
+          Row(children: [
+            // On donne une icon comme deuxieme colonne de notre ligne
+            Icon(Icons.favorite, color: Colors.red), Text("55")
+          ])
+        ],
+      ));
+
   // On construit notre appli, en definissant ses elements principaux
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // Le tritre de notre app
       title: 'App Flutter',
       debugShowCheckedModeBanner: false,
       // Le theme de notre appli
@@ -19,71 +62,17 @@ class MyApp extends StatelessWidget {
         // La couleur de mon appli
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'My Flutter App'),
-    );
-  }
-}
-
-// Represente notre page d'acceuil
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-// Le titre de la page
-  final String title;
-// On créer notre etat
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-// On definit l'Etat de notre page D'acceuil donc de notre appli
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-// On incremente le _counter
-  void _incrementCounter() {
-    setState(() {
-      _counter += 2;
-    });
-  }
-
-  void _decrementCounter() {
-    setState(() {
-      _counter -= 2;
-    });
-  }
-
-// On dit comment on va construire notre page d'acceuil
-  @override
-  Widget build(BuildContext context) {
-    // Notre page
-    return Scaffold(
-      // Le navbar de la page
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      // Le corps de la page centrer
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          // Liste des widget dans le corps de la page
-          children: <Widget>[
-            Text(
-              'Vous avez appuyer sur le bouton plusieurs fois:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      // Le bouton flottant
-      floatingActionButton: FloatingActionButton(
-        // L'action quand on appui sur le bouton
-        onPressed: _incrementCounter,
-        // La bulle d'infos quand on passe sur le bouton
-        tooltip: 'Ajouter',
-        // L'icon sur le bouton
-        child: Icon(Icons.add),
-      ),
+      // Composition de Notre page
+      home: Scaffold(
+          // Le navbar de la page
+          appBar: AppBar(
+            title: Text("Mes recettes"),
+          ),
+          // Le corps de notre Home
+          // Le corps de notrea page sera une tres grande Colonne qui va contenir tous nos composants
+          body: Column(
+            children: [titleSection],
+          )),
     );
   }
 }
