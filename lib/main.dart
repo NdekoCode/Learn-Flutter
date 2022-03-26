@@ -1,5 +1,7 @@
 // On importe tous les outils de dart
 import 'package:flutter/material.dart';
+// On importe la dependance transparent_image
+import 'package:transparent_image/transparent_image.dart';
 
 void main() {
   // la porte d'entrer de mon application
@@ -68,8 +70,9 @@ class MyApp extends StatelessWidget {
 
     Widget descriptionSection = Container(
         padding: const EdgeInsets.all(25),
+        // Si vous mettez trop de texte qui peuvent sortir de l'écran, vous aurez une erreurs, alors pour regler ça dans le cas où vous avez mis une `Column` pour contenir vos elements il faut le remplacer par une `ListView` et cela vous permettra d'avoir une vue SCROLLABLE
         child: Text(
-            "Faire cuire dans une poele les lardons et les champignons. \nDans un bol, verser la boite de concentrer de tomate, y ajouter un demi verre d'eau, ensuite mettre un carré de sucre(Pour enlever l'acidité de la tomate) une pincée de sel, de poivre et une pincée d'herbe de Provence.",
+            "Faire cuire dans une poele les lardons et les champignons. \nDans un bol, verser la boite de concentrer de tomate, y ajouter un demi verre d'eau, ensuite mettre un carré de sucre(Pour enlever l'acidité de la tomate) une pincée de sel, de poivre et une pincée d'herbe de Provence\nLorem ipsum dolor, sit amet consectetur adipisicing elit. Modi, ducimus corporis odio delectus ut cum eveniet, labore sed quis iusto veniam veritatis. Asperiores iusto commodi eaque, maiores ducimus fuga cum neque? Soluta, eos, accusamus cupiditate dicta ducimus esse nihil non nesciunt suscipit culpa vel perspiciatis omnis animi aspernatur labore fugit maiores iste! Voluptate, quas voluptates expedita aut quae sapiente modi porro numquam accusamus quia ducimus dolor possimus inventore maxime, saepe totam. Velit neque animi sit repellat explicabo a aliquam consectetur quas, dolores omnis minus voluptatibus repellendus veniam ab? Nihil, fugiat. Facere debitis commodi hic dolor, ipsum a dolorem numquam fuga dicta esse eligendi voluptatibus? Vel officia nisi exercitationem sequi vitae. Velit culpa, placeat, aspernatur pariatur, suscipit commodi blanditiis tenetur deleniti porro perspiciatis fugit ullam minus repudiandae sit magnam voluptate minima quia? Minus dolorem, ipsam ut et cum consequuntur officia placeat cumque sit porro dolor nesciunt obcaecati in ipsum dolores doloribus molestiae voluptas neque omnis hic. Minus, aut aspernatur distinctio possimus nisi repellat deserunt incidunt ea corrupti odit temporibus est dolor nulla rerum vero numquam corporis quo quis laboriosam accusantium enim maxime aliquam consequuntur. Ea molestiae illo neque dolore accusamus possimus dignissimos nulla error, beatae libero repellat eligendi blanditiis. Rem, illum saepe expedita excepturi dignissimos, sapiente unde nulla voluptatibus fugit minus consequuntur. Quod modi mollitia blanditiis porro nemo earum rerum, quis pariatur repellat officiis inventore laborum aperiam placeat harum iusto vel consectetur, exercitationem possimus nihil nulla maxime. Adipisci obcaecati nisi reiciendis dignissimos nostrum repellendus, sapiente id fuga. Expedita dolor ducimus labore blanditiis soluta ipsam corporis, voluptas ea totam, ut dicta ratione veritatis saepe ab distinctio sed, molestiae est odit tempore necessitatibus error. Reprehenderit, repudiandae repellendus? Ullam quam eos, iure ad dolor distinctio ipsum corrupti reprehenderit veniam odio, quas suscipit necessitatibus ducimus enim expedita deserunt. Aut dolorem sunt temporibus, mollitia eius corrupti?",
             // Permet de ne pas couper les mots en plein milieu
             softWrap: true));
     return MaterialApp(
@@ -89,8 +92,34 @@ class MyApp extends StatelessWidget {
           ),
           // Le corps de notre Home
           // Le corps de notrea page sera une tres grande Colonne qui va contenir tous nos composants
-          body: Column(
-            children: [titleSection, buttonSection, descriptionSection],
+          // On remplace `Column` par `ListView` pour avoir une vue scrollable
+          body: ListView(
+            children: [
+              // ICI on charge l'image en local, donc dans les assets, pour le charger à partir d'une URL il faut remplacer Image.asset() par Image.network
+              // On a remplacer Image.network par La librarie transparent_image
+              // Après on va mettre un petit loader le temps du chargement de l'image et pour ça on va mettre un nouveau conteneur qui n'est pas ni une Row ou une Colonne mais plutot une Stack
+              // Une stack cela veut dire que l'on va empiler les vues
+              // Dans notre cas on va avoir notre loader et par dessus on va mettre notre image et ainsi quand l'image sera entierement telecharger cela va charger mon loader
+              Stack(children: [
+                // On met le loader au dessus de l'image
+                Container(
+                    width: 600,
+                    height: 240,
+                    child: Center(child: CircularProgressIndicator())),
+                // On empile le container sur l'image qu'on charge en mode transparent
+                FadeInImage.memoryNetwork(
+                    // Pour que l'image soit transparent ET QU'IL APPARAISSE avec un petit effet de fondus
+                    placeholder: kTransparentImage,
+                    image:
+                        'https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80',
+                    width: 600,
+                    height: 240,
+                    fit: BoxFit.cover)
+              ]),
+              titleSection,
+              buttonSection,
+              descriptionSection
+            ],
           )),
     );
   }

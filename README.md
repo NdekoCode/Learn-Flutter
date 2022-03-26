@@ -38,3 +38,17 @@ il prend plusieurs parametres comme:
 
 - child : Qui va etre l'element qui est contenus dans le conteneur
 - Le padding: Qui permet d'espace un element de ces autres elements avec des valeurs comme `EdgeInsets.only(bottom:8)` Permet d'ajouter 8px d'espacement en bas de l'elemet
+
+## Les images
+
+Pour ajouter des images dans flutter on doit s'interesser à la partie `assetsBundle Class`; car c'est ici qu'on nous explique comment on ajoute les images dans les `assets` càd directementment dans l'application.
+Pour ajouter des images dans notre projets il faut les ajouter dans le fichier `pubspec.yaml` et ainsi les déclarer dans la partie `assets` avec le code suivant comme exemple:
+
+```{YAML}
+flutter:
+    assets:
+        - images/hamilton.jpg
+        - images/lafayette.png
+```
+
+Dans cet exemple nos images se trouve dans le dossier `images`
