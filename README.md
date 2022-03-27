@@ -158,3 +158,14 @@ FadeInImage.assetNetwork(
 ### Mettre en cache les images avec flutter
 
 Pour mettre en cache une image avec flutter on utilise la librairie `cached_network_image` à telecharger sur `https://pub.dev`
+Et ainsi pour l'utiliser il vient avec une classe qui est `CachedNetworkImage` qui a des parametres suivants:
+
+- imageUrl: L'URL de l'image à mettre en cache
+- placeholder: Qui va contenir une fonction faisant qu'on ai un loader avant le chargement de l'image ou un texte descriptif de l'image si il y a erreur de chargement,
+- errorWidget: Contenant un icon d'Erreur dans le cas où on a une erreur de chargement de l'icon
+- width et height: Les tailles de l'image
+- fit: FitBox.cover ou FitBox.contain pour definir le size de l'image à l'affichage
+
+## Modification d'un Widget StatefulWidget
+
+Ici on va parler de comment gerer l'Etat d'un widget
