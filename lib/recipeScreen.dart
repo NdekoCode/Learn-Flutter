@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learn_flutter/favoriteWidget.dart';
+import 'package:learn_flutter/recipe.dart';
 // On importe la dependance transparent_image pour faire des images transparent
 // import 'package:transparent_image/transparent_image.dart';
 // On importe la dependance cached_network_image pour mettre des images en cache
@@ -7,6 +8,8 @@ import 'package:learn_flutter/favoriteWidget.dart';
 
 // La classe  representant la page d'acceuil de notre application
 class RecipeScreen extends StatelessWidget {
+  const RecipeScreen({Key? key, required this.recipe}) : super(key: key);
+  final Recipe recipe;
   // On construit notre page d'accueil
   @override
   Widget build(BuildContext context) {
@@ -31,21 +34,23 @@ class RecipeScreen extends StatelessWidget {
                   Container(
                       padding: const EdgeInsets.only(bottom: 8),
                       // Un noeud de type texte
-                      child: Text("Pizza Fracile",
+                      child: Text(recipe.title!,
                           // On lui met un style ici c'est une graissage et une taille de police
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 25))),
                   Container(
                       padding: const EdgeInsets.only(bottom: 5),
-                      child: Text("Par Arick Bulakali",
+                      child: Text(recipe.user!,
                           style: TextStyle(
                               color: Colors.grey[500], fontSize: 20))),
-                  Text("Fait le 25 mars 2022",
+                  Text(recipe.date!,
                       style: TextStyle(color: Colors.grey[500], fontSize: 16))
                 ],
               ),
             ),
-            FavoriteWidget(favoriteCount: 24, isFavorited: false)
+            FavoriteWidget(
+                favoriteCount: recipe.favoriteCount!,
+                isFavorited: recipe.isFavorited!)
           ],
         ));
     Widget buttonSection = Container(
@@ -67,8 +72,7 @@ class RecipeScreen extends StatelessWidget {
     Widget descriptionSection = Container(
         padding: const EdgeInsets.all(25),
         // Si vous mettez trop de texte qui peuvent sortir de l'écran, vous aurez une erreurs, alors pour regler ça dans le cas où vous avez mis une `Column` pour contenir vos elements il faut le remplacer par une `ListView` et cela vous permettra d'avoir une vue SCROLLABLE
-        child: Text(
-            "Faire cuire dans une poele les lardons et les champignons. \nDans un bol, verser la boite de concentrer de tomate, y ajouter un demi verre d'eau, ensuite mettre un carré de sucre(Pour enlever l'acidité de la tomate) une pincée de sel, de poivre et une pincée d'herbe de Provence\nLorem ipsum dolor, sit amet consectetur adipisicing elit. Modi, ducimus corporis odio delectus ut cum eveniet, labore sed quis iusto veniam veritatis. Asperiores iusto commodi eaque, maiores ducimus fuga cum neque? Soluta, eos, accusamus cupiditate dicta ducimus esse nihil non nesciunt suscipit culpa vel perspiciatis omnis animi aspernatur labore fugit maiores iste! Voluptate, quas voluptates expedita aut quae sapiente modi porro numquam accusamus quia ducimus dolor possimus inventore maxime, saepe totam. Velit neque animi sit repellat explicabo a aliquam consectetur quas, dolores omnis minus voluptatibus repellendus veniam ab? Nihil, fugiat. Facere debitis commodi hic dolor, ipsum a dolorem numquam fuga dicta esse eligendi voluptatibus? Vel officia nisi exercitationem sequi vitae. Velit culpa, placeat, aspernatur pariatur, suscipit commodi blanditiis tenetur deleniti porro perspiciatis fugit ullam minus repudiandae sit magnam voluptate minima quia? Minus dolorem, ipsam ut et cum consequuntur officia placeat cumque sit porro dolor nesciunt obcaecati in ipsum dolores doloribus molestiae voluptas neque omnis hic. Minus, aut aspernatur distinctio possimus nisi repellat deserunt incidunt ea corrupti odit temporibus est dolor nulla rerum vero numquam corporis quo quis laboriosam accusantium enim maxime aliquam consequuntur. Ea molestiae illo neque dolore accusamus possimus dignissimos nulla error, beatae libero repellat eligendi blanditiis. Rem, illum saepe expedita excepturi dignissimos, sapiente unde nulla voluptatibus fugit minus consequuntur. Quod modi mollitia blanditiis porro nemo earum rerum, quis pariatur repellat officiis inventore laborum aperiam placeat harum iusto vel consectetur, exercitationem possimus nihil nulla maxime. Adipisci obcaecati nisi reiciendis dignissimos nostrum repellendus, sapiente id fuga. Expedita dolor ducimus labore blanditiis soluta ipsam corporis, voluptas ea totam, ut dicta ratione veritatis saepe ab distinctio sed, molestiae est odit tempore necessitatibus error. Reprehenderit, repudiandae repellendus? Ullam quam eos, iure ad dolor distinctio ipsum corrupti reprehenderit veniam odio, quas suscipit necessitatibus ducimus enim expedita deserunt. Aut dolorem sunt temporibus, mollitia eius corrupti?",
+        child: Text(recipe.description!,
 
             // Permet de ne pas couper les mots en plein milieu
             softWrap: true));
@@ -95,7 +99,7 @@ class RecipeScreen extends StatelessWidget {
                       child: Image.asset('./assets/images/loader-1.gif')),
                   width: 600,
                   height: 240),
-              Image.asset('./assets/images/pizza1.jpg',
+              Image.asset(recipe.imageUrl!,
                   width: 600, height: 240, fit: BoxFit.cover)
             ]),
             titleSection,
