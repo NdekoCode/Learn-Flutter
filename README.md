@@ -211,6 +211,13 @@ return Scaffold(
 
 ### Recaputulatif
 
+ On peut styliser un button en lui ajoutant le parametre `style` et le widget `ButtonStyle`
+
+ ```{DART}
+    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(Colors.red))
+ ```
+
 ![PopupMenuButton](./assets/images/Learn-%20All%20button%20Widget.PNG)
 
 ## Row et Column
@@ -226,10 +233,60 @@ Permet d'aligner horizontalement
 ### Column
 
 Permet d'aligner verticalement
-Il prend en parametre `children` qui est une liste des Widget à utiliser dans la Ligne
+Il prend en parametre `children` qui est une liste des Widget à utiliser dans la Ligne et aussi `mainAxisAlignment` (axe des X) pour l'alignement horizontal et `crossAxisAlignement`(axe des Y) pour l'alignment vertical
 
 ### Exemple de row Et column
 
-Il prend en parametre `children` qui est une liste des Widget à utiliser dans la Colonne
+Il prend en parametre `children` qui est une liste des Widget à utiliser dans la Colonne et aussi `mainAxisAlignment` (axe des X) pour l'alignement horizontal et `crossAxisAlignement`(axe des Y) pour l'alignment vertical
 
 ![Exemple d'une implementation des Row et Column](./assets/images/Learn-%20Example%20de%20Row%20et%20Column%20dans%20Flutter.PNG)
+
+## Container
+
+Le `Container` est de base invisible mais il est très utile pour styliser un widget enfant, de base le `Container` prend toute la place disponible mais en lui rajoutant un enfant ie `child` qui peut etre de plusieurs type comme de type `Text` par exemple alors dans ce cas il s'adapte il s'adapte à celui-ci
+Ce `Container` une couleur peut prendre plusieur parametres dont:
+
+- child: Qui est l'enfant que contient le container
+- color: Si on veut donner une coleur de fond au `Container`
+- width: La largeur du `Container` qui se fait en entier
+- height: La longeur du `Container` qui se fait en entier
+- padding: La marge interieur du `Container` ie l'espace entre les bords du `Container` et son Widget enfant, qui est notre Texte et pour cela on utilise `padding: const EdgeInsets.all(NombreQueVousDonner)` avec par exemple `padding: const EdgeInsets.all(20)` ou `padding: const EdgeInsets.only(left: 10,right: 5, top: 10,bottom: 30)` ou encore le symetrique ie `padding:const EdgeInsets.symetric(horizontal: 10, vertical: 30)`
+- margin:La marge exterieur du `Container` il nous permet de definit l'espace minimum entre notre `Container` et son parent, il est definis de la meme maniere que le padding mais avec des Effets visuel differents càd `margin: const EdgeInsets.all(NombreQueVousDonner)` avec par exemple `margin: const EdgeInsets.all(10)` ou `margin: const EdgeInsets.only(top: 20)` ou encore le symetrique ie `margin: const EdgeInsets.symetric(horizontal: 10, vertical: 30)`
+- alignment: Permet d'aligner l'enfant (`child`) par rapport au parent par exemple en Haut à droite `alignment: Alignement.topRight` et comme il n'a pas de taille fixe, alors pour l'alignement il se refere au Widget parent on peut fixer la taille du container en lui definisant une `largeur` et une `hauteur` et dans ce cas l'aligment se faira par rapport à la taille du container
+- transform: en faisant de la transformation de notre `Container` avec des `translation` ou `rotation` suivant les 3 axes X, Y et Z par exemple une rotation `transform: Matrix4.rotationZ(0.5)`
+- decoration: nous permet de styliser ou de decorer notre `Container`, pour utiliser une decoration de fond on doit pour cela retirer l'attribut `color` du `Container` car cela sera definit dans la decoration, On a plusieurs sorte de decoration comme en utilisant le widget `ShapeDecoration` ou `BoxDecoration`, `ShapeDecoration` permet d'avoir une ou plusieurs bordure par exemple une double bordure rouge et blanche et `BoxDecoration` permet de jouer sur les formes de bordure ie comme le `border-radius` en CSS et `BoxDecoration` peut choisir specifiquement sur quel partie du bordure il peut mettre ses courbes ou sur mettre ses courbes de bordure sur tous les cotés et pour faire cela on utilise le code suivant:
+
+```{DART}
+// Le cas du ShapeDecoration
+decoration: const ShapeDecoration(
+                        color: Colors.red, 
+                        shape: Border.all(
+                                    color: Colors.white,
+                                    width: 8
+                                    ) + Border.all(
+                                    color: Colors.red,
+                                    width: 8
+                                )
+                        )
+
+```
+
+Dans ce code d'en haut on vient dire que notre `Container` aura comme decoration une couleur de font rouge, qu'il aura deux bordure dont chacun fait 8px et dont le premier a une couleur `Blanche` et la seconde a une couleur `Rouge`
+
+```{DART}
+// Le cas du ShapeDecoration sur le coté haut droit et bas droit
+decoration: const BoxDecoration(
+    color: Colors.red,
+    borderRadius: BorderRadius.only(
+        topRight: Radius.circular(20),
+        bottomRight: Ridius.Circular(20)
+    )
+)
+
+// Le cas du ShapeDecoration sur tous les cotés
+decoration: const BoxDecoration(
+    color: Colors.red,
+    borderRadius: BorderRadius.circular(20)
+)
+
+```
