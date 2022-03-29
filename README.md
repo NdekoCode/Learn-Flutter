@@ -45,6 +45,8 @@ Par exemple:
 
 ```
 
+![Faire un hello World avec flutter](./assets/images/Learn-%20HelloWorld%20in%20flutter.PNG)
+
 ## Les boutons
 
  Flutter a déjà créer plusieurs type de boutons pour nous faciliter la vie et dans ces types on a:
@@ -63,6 +65,8 @@ TextButton(
     print("Vous avez cliquer sur OKAY");
     })
 ```
+
+![Le bouton TextButton ressemblant à du texte simple](./assets/images/Learn-%20TextButton.PNG)
 
 ### RaisedButton et OutlineButton
 
@@ -87,6 +91,10 @@ OutlinedButton(
     })
 
 ```
+
+Le bouton ElevatedButton ressemblant à un bouton à fond du theme ![Le bouton ElevatedButton ressemblant à un bouton à fond du theme](./assets/images/Learn%20-%20ElevatedButton.PNG)
+
+Le bouton OutlinedButton ressemblant à un bouton à fond du theme ![Le bouton OutlinedButton ressemblant à un bouton à fond du theme](./assets/images/Learn-%20OutlineButton.PNG)
 
 ### ButtonBar
 
@@ -116,6 +124,8 @@ return Scaffold(
 
 ```
 
+![ButtonBar](./assets/images/Learn-%20Button%20Bar.PNG)
+
 ### PopupMenuButton
 
 Ce widget porte bien son nom, c'est une icon à 3 points vertical qui affiche un menu, il peut etre utiliser dans une `AppBar` par exemple pour etre rediriger vers d'autres ecrans.
@@ -135,9 +145,14 @@ return Scaffold(
                     ]))));
 ```
 
+![PopupMenuButton](./assets/images/Learn-%20PopupMenuButton%20-1.PNG)
+![PopupMenuButton](./assets/images/Learn-%20PopupMenuButton%20-2.PNG)
+
 ### IconButton
 
 Si vous souhaiter avoir une icon Clickable, c'est très simple il suffit d'utiliser les Widget `IconButton` il prend les parametres suivant, `icon` qui est l'Icon que l'on souhaite utiliser souvant on les tires dans le Widget `Icons.IconAUtiliser` et le parametre onPressed qui est l'action qui survient lors de l'Appui sur ce boutton
+
+![PopupMenuButton](./assets/images/Learn-%20IconButton.PNG)
 
 ### DropdownButton
 
@@ -170,6 +185,10 @@ return Scaffold(
                     }))));
 ```
 
+PopupMenuButton ![PopupMenuButton](./assets/images/Learn-%20DropdownButton%20-1.PNG)
+
+PopupMenuButton ![PopupMenuButton](./assets/images/Learn-%20DropdownButton%20-2.PNG)
+
 ### FloatinActionButton
 
 Qui est generalement utiliser comme action principale de la page, ou action principale de l'application
@@ -188,6 +207,12 @@ return Scaffold(
                     }))))
 ```
 
+![PopupMenuButton](./assets/images/Learn-%20FloatingActionButton.PNG)
+
+### Recaputulatif
+
+![PopupMenuButton](./assets/images/Learn-%20All%20button%20Widget.PNG)
+
 ## Row et Column
 
 Permet d'afficher plusieurs elements aligner selon les ligne et les colonnes
@@ -201,7 +226,10 @@ Permet d'aligner horizontalement
 ### Column
 
 Permet d'aligner verticalement
+Il prend en parametre `children` qui est une liste des Widget à utiliser dans la Ligne
 
 ### Exemple de row Et column
+
+Il prend en parametre `children` qui est une liste des Widget à utiliser dans la Colonne
 
 ![Exemple d'une implementation des Row et Column](./assets/images/Learn-%20Example%20de%20Row%20et%20Column%20dans%20Flutter.PNG)
