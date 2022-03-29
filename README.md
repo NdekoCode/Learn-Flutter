@@ -188,3 +188,20 @@ return Scaffold(
                     }))))
 ```
 
+## Row et Column
+
+Permet d'afficher plusieurs elements aligner selon les ligne et les colonnes
+Au sein d'une `Row` et `Column` nous avons la possibilité d'aligner sur l'axe des X avec mainAxisAlignment et sur l'axe des Y avec crossAxisAlignement
+![Alignement vertical et Horizontal des Widget](./assets/images/Learn-%20Alignement%20Horizontale%20et%20vertical%20des%20widget.PNG)
+
+### Row
+
+Permet d'aligner horizontalement
+
+### Column
+
+Permet d'aligner verticalement
+
+### Exemple de row Et column
+
+![Exemple d'une implementation des Row et Column](./assets/images/Learn-%20Example%20de%20Row%20et%20Column%20dans%20Flutter.PNG)
